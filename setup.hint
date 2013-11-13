@@ -1,6 +1,0 @@
-category: Gnome
-requires: libatkmm1.6_1 libcairo2 libdbus1_3 libgcc1 libgconf2_4 libgdk_pixbuf2.0_0 libgdome0 libglib2.0_0 libglibmm2.4_1 libgstreamer0.10_0 libgtk2.0_0 libgtkmm2.4_1 libICE6 libintl8 libpango1.0_0 libpangomm1.4_1 libsigc2.0_0 libSM6 libstdc++6 libX11_6 libXtst6
-sdesc: "Repetitive Strain Injury prevention and recovery tool"
-ldesc: "Workrave is a program that assists in the recovery and prevention of
-Repetitive Strain Injury (RSI). The program frequently alerts you to
-take micro-pauses, rest breaks and restricts you to your daily limit."

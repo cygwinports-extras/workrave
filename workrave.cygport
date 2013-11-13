@@ -1,0 +1,12 @@
+inherit gnome2
+
+NAME="workrave"
+VERSION=1.9.4
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Repetitive Strain Injury prevention and recovery tool"
+DESCRIPTION="Workrave is a program that assists in the recovery and prevention of
+Repetitive Strain Injury (RSI). The program frequently alerts you to
+take micro-pauses, rest breaks and restricts you to your daily limit."
+HOMEPAGE="http://www.workrave.org/"
+SRC_URI="mirror://sourceforge/workrave/${NAME}-${VERSION}.tar.gz"

@@ -1,5 +1,0 @@
-inherit gnome2
-
-DESCRIPTION="Repetitive Strain Injury prevention and recovery tool"
-HOMEPAGE="http://www.workrave.org/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
