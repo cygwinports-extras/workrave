@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="workrave"
-VERSION=1.9.4
+VERSION=1.10.1
 RELEASE=1
 CATEGORY="X11"
 SUMMARY="Repetitive Strain Injury prevention and recovery tool"
@@ -10,3 +10,4 @@ Repetitive Strain Injury (RSI). The program frequently alerts you to
 take micro-pauses, rest breaks and restricts you to your daily limit."
 HOMEPAGE="http://www.workrave.org/"
 SRC_URI="mirror://sourceforge/workrave/${NAME}-${VERSION}.tar.gz"
+PATCH_URI="1.10.1-introspection.patch"
