@@ -1,0 +1,12 @@
+--- origsrc/workrave-1.10.1/configure.ac	2013-06-12 11:40:10.000000000 -0500
++++ src/workrave-1.10.1/configure.ac	2014-05-11 21:29:39.482405700 -0500
+@@ -837,8 +863,7 @@ dnl
+ dnl Internationalization
+ dnl
+ 
+-AM_GNU_GETTEXT_VERSION([0.17])
+-AM_GNU_GETTEXT([external])
++AM_GLIB_GNU_GETTEXT
+ 
+ dnl Hack because windows gettext package is SEVERELY broken...
+ if test "x$platform_os_win32" = "xyes"

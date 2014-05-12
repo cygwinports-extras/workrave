@@ -2,7 +2,7 @@ inherit gnome2
 
 NAME="workrave"
 VERSION=1.10.1
-RELEASE=1
+RELEASE=2
 CATEGORY="X11"
 SUMMARY="Repetitive Strain Injury prevention and recovery tool"
 DESCRIPTION="Workrave is a program that assists in the recovery and prevention of
@@ -10,4 +10,33 @@ Repetitive Strain Injury (RSI). The program frequently alerts you to
 take micro-pauses, rest breaks and restricts you to your daily limit."
 HOMEPAGE="http://www.workrave.org/"
 SRC_URI="mirror://sourceforge/workrave/${NAME}-${VERSION}.tar.gz"
-PATCH_URI="1.10.1-introspection.patch"
+PATCH_URI="
+	1.10.1-glib-gettext.patch
+	1.10.1-icon-install.patch
+	1.10.1-introspection.patch
+	1.10.1-mate-panel.patch
+"
+
+CYGCONF_ARGS="--disable-gnome2 --disable-gnome3 --enable-mate"
+
+PKG_NAMES="${NAME} mate-${NAME}-applet"
+workrave_CONTENTS="
+	etc/postinstall/workrave.sh
+	usr/bin/workrave.exe
+	usr/share/applications/workrave.desktop
+	usr/share/dbus-1/services/org.workrave.Workrave.service
+	usr/share/doc/workrave/
+	usr/share/icons/hicolor/*/apps/workrave*
+	usr/share/locale/*/LC_MESSAGES/workrave.mo
+	usr/share/sounds/workrave/
+	usr/share/workrave/
+"
+mate_workrave_applet_REQUIRES=${NAME}
+mate_workrave_applet_CONTENTS="
+	usr/libexec/workrave-applet.exe
+	usr/share/dbus-1/services/org.mate.panel.applet.WorkraveAppletFactory.service
+	usr/share/mate-panel/
+"
+PKG_IGNORE="usr/share/gnome-shell/"
+
+DIFF_EXCLUDES="po"

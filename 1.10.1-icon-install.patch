@@ -1,0 +1,11 @@
+--- origsrc/workrave-1.10.1/frontend/common/share/images/Makefile.am	2011-11-07 14:40:48.000000000 -0600
++++ src/workrave-1.10.1/frontend/common/share/images/Makefile.am	2014-05-11 21:37:45.183186200 -0500
+@@ -11,7 +11,7 @@ SUBDIRS = 		win32 osx 16x16 24x24 32x32
+ imagesdir = 		$(pkgdatadir)/images
+ images_DATA = 		$(wildcard $(srcdir)/*.png) $(wildcard $(srcdir)/*.ico) $(wildcard $(srcdir)/*.xpm)
+ 
+-svgdir = 		$(datadir)/icons/hicolor/scalable/$(category)
++svgdir = 		$(datadir)/icons/hicolor/scalable/apps
+ svg_DATA = 		workrave-sheep.svg
+ 
+ EXTRA_DIST = 		${images_DATA} $(icons_DATA) $(svg_DATA)
