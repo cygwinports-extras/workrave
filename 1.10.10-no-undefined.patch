@@ -1,0 +1,30 @@
+--- origsrc/workrave-1_10_10/frontend/applets/common/src/Makefile.am	2016-03-01 20:20:14.136113000 -0600
++++ src/workrave-1_10_10/frontend/applets/common/src/Makefile.am	2016-03-01 20:19:46.082550600 -0600
+@@ -19,6 +19,8 @@ libworkrave_private_1_0_la_SOURCES = \
+ libworkrave_private_1_0_la_CFLAGS = \
+ 	-Wall -std=c99 $(GTK_CFLAGS) -I$(srcdir)/../include \
+ 	-DWORKRAVE_PKGDATADIR="\"${pkgdatadir}\""
++libworkrave_private_1_0_la_LDFLAGS = \
++	-avoid-version -no-undefined
+ libworkrave_private_1_0_la_LIBADD = \
+ 	$(GTK_LIBS)
+ 
+@@ -53,6 +55,8 @@ libworkrave_gtk2_private_1_0_la_SOURCES
+ libworkrave_gtk2_private_1_0_la_CFLAGS = \
+ 	-Wall -DUSE_GTK2 -std=c99 $(GTK2_CFLAGS) -I$(srcdir)/../include \
+ 	-DWORKRAVE_PKGDATADIR="\"${pkgdatadir}\""
++libworkrave_gtk2_private_1_0_la_LDFLAGS = \
++	-avoid-version -no-undefined
+ libworkrave_gtk2_private_1_0_la_LIBADD = \
+ 	$(GTK2_LIBS)
+ 
+--- origsrc/workrave-1_10_10/frontend/applets/indicator/src/Makefile.am	2015-12-12 07:10:11.000000000 -0600
++++ src/workrave-1_10_10/frontend/applets/indicator/src/Makefile.am	2016-03-01 20:21:00.366983600 -0600
+@@ -14,6 +14,7 @@ libworkrave_la_CFLAGS = \
+ libworkrave_la_LIBADD = \
+ 	$(INDICATOR_LIBS) -L$(builddir)/../../common/src -lworkrave-private-1.0
+ libworkrave_la_LDFLAGS = \
++	-no-undefined \
+ 	-module \
+ 	-avoid-version
+ 

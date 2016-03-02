@@ -1,42 +1,80 @@
 inherit gnome2
 
 NAME="workrave"
-VERSION=1.10.1
-RELEASE=2
+VERSION=1.10.10
+RELEASE=1
 CATEGORY="X11"
 SUMMARY="Repetitive Strain Injury prevention and recovery tool"
 DESCRIPTION="Workrave is a program that assists in the recovery and prevention of
 Repetitive Strain Injury (RSI). The program frequently alerts you to
 take micro-pauses, rest breaks and restricts you to your daily limit."
 HOMEPAGE="http://www.workrave.org/"
-SRC_URI="mirror://sourceforge/workrave/${NAME}-${VERSION}.tar.gz"
+SRC_URI="https://github.com/rcaelers/workrave/archive/v${VERSION//./_}/workrave-v${VERSION//./_}.tar.gz"
+SRC_DIR="workrave-${VERSION//./_}"
 PATCH_URI="
+	http://pkgs.fedoraproject.org/cgit/rpms/workrave.git/plain/workrave-1.10.10-fix-translations.patch
 	1.10.1-glib-gettext.patch
 	1.10.1-icon-install.patch
-	1.10.1-introspection.patch
-	1.10.1-mate-panel.patch
+	1.10.10-no-undefined.patch
+	1.10.10-first_weekday.patch
+	1.10.10-gstreamer1.patch
 "
 
-CYGCONF_ARGS="--disable-gnome2 --disable-gnome3 --enable-mate"
+CYGCONF_ARGS="
+	--disable-gnome2
+	--enable-gnome3
+	--enable-gtk2
+	--enable-introspection
+	--enable-mate
+	--enable-xfce
+"
 
-PKG_NAMES="${NAME} mate-${NAME}-applet"
+PKG_NAMES="${NAME} ${NAME}-gtk2 gnome-${NAME}-applet mate-${NAME}-applet xfce4-${NAME}-plugin"
 workrave_CONTENTS="
 	etc/postinstall/workrave.sh
+	usr/bin/cygworkrave-private-1.0.dll
 	usr/bin/workrave.exe
+	usr/share/appdata/workrave.appdata.xml
 	usr/share/applications/workrave.desktop
 	usr/share/dbus-1/services/org.workrave.Workrave.service
 	usr/share/doc/workrave/
+	usr/share/glib-2.0/schemas/org.workrave.*.xml
 	usr/share/icons/hicolor/*/apps/workrave*
 	usr/share/locale/*/LC_MESSAGES/workrave.mo
 	usr/share/sounds/workrave/
 	usr/share/workrave/
 "
-mate_workrave_applet_REQUIRES=${NAME}
-mate_workrave_applet_CONTENTS="
-	usr/libexec/workrave-applet.exe
-	usr/share/dbus-1/services/org.mate.panel.applet.WorkraveAppletFactory.service
-	usr/share/mate-panel/
+workrave_gtk2_REQUIRES=${NAME}
+workrave_gtk2_CONTENTS="
+	usr/bin/cygworkrave-gtk2-private-1.0.dll
 "
-PKG_IGNORE="usr/share/gnome-shell/"
+gnome_workrave_applet_CATEGORY="GNOME"
+gnome_workrave_applet_CONTENTS="
+	usr/lib/gnome-applets/workrave-applet.exe
+	usr/share/dbus-1/services/org.gnome.panel.applet.WorkraveAppletFactory.service
+	usr/share/gnome-panel/5.0/applets/org.workrave.WorkraveApplet.panel-applet
+	usr/share/gnome-panel/ui/workrave-gnome-applet-menu.xml
+"
+mate_workrave_applet_CATEGORY="MATE"
+mate_workrave_applet_CONTENTS="
+	usr/lib/mate-applets/workrave-applet.exe
+	usr/share/dbus-1/services/org.mate.panel.applet.WorkraveAppletFactory.service
+	usr/share/mate-panel/applets/org.workrave.WorkraveApplet.mate-panel-applet
+	usr/share/mate-panel/ui/workrave-menu.xml
+"
+xfce4_workrave_plugin_CATEGORY="Xfce"
+xfce4_workrave_plugin_CONTENTS="
+	usr/lib/xfce4/panel-plugins/xfce4-workrave-plugin.exe
+	usr/share/xfce4/panel-plugins/workrave-xfce-applet.desktop
+"
+# libworkrave-private is needed by the gnome3 applet, but the introspection
+# is only used by the gnome-shell and cinnamon extensions
+PKG_IGNORE="
+	usr/lib/girepository-1.0/Workrave-1.0.typelib
+	usr/lib/libworkrave*private*.dll.a
+	usr/share/cinnamon/
+	usr/share/gir-1.0/Workrave-1.0.gir
+	usr/share/gnome-shell/
+"
 
 DIFF_EXCLUDES="po"
